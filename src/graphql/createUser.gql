@@ -1,0 +1,10 @@
+mutation($name: String! $password: String!){
+  createUser(user:{
+    name: $name
+    password: $password
+    data:""
+    exist:true
+  }){
+    id
+  }
+}

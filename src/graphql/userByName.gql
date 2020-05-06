@@ -1,0 +1,6 @@
+query($name: String!){
+  userBYname(name:$name){
+    name
+    password
+  }
+}
