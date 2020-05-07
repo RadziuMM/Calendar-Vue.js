@@ -1,37 +1,18 @@
 <template>
   <div class="home">
     <SideMenu />
-    FrontePejge
+    taski
   </div>
 </template>
 
 <script>
-import getData from '../graphql/getData.gql';
-import store from '../store/index';
 import SideMenu from '../components/SideMenu.vue';
 
-let data;
-
 export default {
-  name: 'FrontPage',
+  name: 'Tasks',
   components: {
     SideMenu,
   },
-  data: () => ({
-  }),
-  mounted() {
-    const { nick } = store.getters;
-    this.$apollo.query({
-      query: getData,
-      variables: {
-        name: nick,
-      },
-    }).then((result) => {
-      data = result.data.userBYname; // all feched info
-      store.commit('loadsData', data);// send to store
-    });
-  },
-  methods: {},
 };
 </script>
 <style lang="scss" scooped>

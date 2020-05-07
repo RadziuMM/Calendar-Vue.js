@@ -153,7 +153,7 @@ input:focus{
 }
 #mess2{
   color: red;
-  font-size: 10px;
+  font-size: 12px;
 }
 input:first-child{
   margin-top:10%;

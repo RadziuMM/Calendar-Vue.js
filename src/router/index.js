@@ -20,6 +20,21 @@ const routes = [
     name: 'FrontPage',
     component: () => import('../views/FrontPage.vue'),
   },
+  {
+    path: '/calendar',
+    name: 'Calendar',
+    component: () => import('../views/Calendar.vue'),
+  },
+  {
+    path: '/tasks',
+    name: 'Tasks',
+    component: () => import('../views/Tasks.vue'),
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: () => import('../views/Settings.vue'),
+  },
 ];
 
 const router = new VueRouter({
