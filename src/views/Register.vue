@@ -1,13 +1,18 @@
 <template>
   <div class='Box'>
     <div class="Login">Register</div>
-    <form>
-    <input placeholder="nickname" required id="nick"/>
-    <input placeholder="password" type="password" required id="pass" minlength="6"/>
-    <input placeholder="repeat password" type="password" required id="pass2" minlength="6"/>
+    <form autocomplete="off">
+    <input placeholder="nickname" onfocus="this.placeholder = ''"
+    onblur="this.placeholder = 'nickname'" required id="nick"/>
+    <input placeholder="password" type="password" onfocus="this.placeholder = ''"
+    onblur="this.placeholder = 'password'" required id="pass" minlength="6"/>
+    <input placeholder="repeat password" onfocus="this.placeholder = ''"
+    onblur="this.placeholder = 'reapet password'" type="password"
+    required id="pass2" minlength="6"/>
     <div id="mess"></div>
-    <input placeholder="email" type="email" required id="mail"/>
-      <div><button class="SButton" type="submit" @click="register()">Register</button></div>
+    <input placeholder="email" onfocus="this.placeholder = ''"
+    onblur="this.placeholder = 'email'" type="email" required id="mail"/>
+    <div><button class="SButton" type="submit" @click="register()">Register</button></div>
       <span class="nregister">Have account?</span>
       <span class="register" @click="goToLog()">Go Back</span>
     </form>

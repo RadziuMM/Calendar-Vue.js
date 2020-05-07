@@ -1,9 +1,11 @@
 <template>
   <div class='Box'>
     <div class="Login">Login</div>
-    <form>
-    <input placeholder="nickname" id="nick" required/>
-    <input placeholder="password" type=password id="pass" required />
+    <form autocomplete="off">
+    <input placeholder="nickname" onfocus="this.placeholder = ''"
+    onblur="this.placeholder = 'nickname'" id="nick" required/>
+    <input placeholder="password" onfocus="this.placeholder = ''"
+    onblur="this.placeholder = 'password'" type=password id="pass" required />
     <div id="mess2"></div>
       <div><button class="SButton" @click="log()" type="submit">Sign in</button></div>
       <span class="nregister">Not have account?</span>
