@@ -1,17 +1,19 @@
 <template>
   <div class="home">
     <SideMenu />
-    taski
+    <TasksBox />
   </div>
 </template>
 
 <script>
 import SideMenu from '../components/SideMenu.vue';
+import TasksBox from '../components/TasksBox.vue';
 
 export default {
   name: 'Tasks',
   components: {
     SideMenu,
+    TasksBox,
   },
 };
 </script>
