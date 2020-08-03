@@ -25,7 +25,6 @@ import createUser from '../graphql/createUser.gql';
 
 const passwordHash = require('password-hash');
 
-
 export default {
   name: 'SignBox',
   methods: {

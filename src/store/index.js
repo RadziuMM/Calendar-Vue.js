@@ -28,5 +28,11 @@ export default new Vuex.Store({
     nick(state) {
       return state.nick;
     },
+    task(state) {
+      return state.sData;
+    },
+    id(state) {
+      return state.id;
+    },
   },
 });

@@ -1,0 +1,11 @@
+mutation($id: ID! $data:String ){
+  updateUser(
+    id: $id
+    exist: true
+    data: $data
+  ){
+    id
+    exist
+    data
+  }
+}
