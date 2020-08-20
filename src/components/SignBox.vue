@@ -7,7 +7,7 @@
     <input placeholder="password" onfocus="this.placeholder = ''"
     onblur="this.placeholder = 'password'" type=password id="pass" required />
     <div id="mess2"></div>
-      <div><button class="SButton" @click="log()" type="submit">Sign in</button></div>
+      <div><button class="SButton" @click="log()">Sign in</button></div>
       <span class="nregister">Not have account?</span>
       <span class="register" @click="goToRegister()">Register now</span>
     </form>

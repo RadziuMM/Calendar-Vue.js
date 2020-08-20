@@ -8,6 +8,8 @@ export default new Vuex.Store({
     nick: '',
     id: '',
     sData: '',
+    calendarData: [],
+    cData: '',
     exist: false,
   },
   mutations: {
@@ -18,6 +20,15 @@ export default new Vuex.Store({
       this.state.sData = Data.data.split('||');
       this.state.id = Data.id;
       this.state.exist = Data.exist;
+    },
+    addEvent(state, calendarData) {
+      this.state.calendarData.push(calendarData);
+    },
+    updateEvents(state, calendarData) {
+      this.state.calendarData = calendarData;
+    },
+    fetchData(state, cData) {
+      this.state.cData = cData;
     },
   },
   actions: {
@@ -30,6 +41,12 @@ export default new Vuex.Store({
     },
     task(state) {
       return state.sData;
+    },
+    calendarData(state) {
+      return state.calendarData;
+    },
+    cData(state) {
+      return state.cData;
     },
     id(state) {
       return state.id;

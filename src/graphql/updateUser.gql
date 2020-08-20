@@ -1,11 +1,13 @@
-mutation($id: ID! $data:String ){
+mutation($id: ID! $data:String $Events:String){
   updateUser(
     id: $id
     exist: true
     data: $data
+    Events : $Events
   ){
     id
     exist
     data
+    Events
   }
 }

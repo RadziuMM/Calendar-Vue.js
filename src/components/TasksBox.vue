@@ -2,7 +2,7 @@
   <div class="Tasks-Box">
      <div class="Tasks-Box__Title"> Task List </div>
      <ul class="Tasks-Box__TaskArray">
-      <li v-for="(item,xNum) in x" :key="item.x" v-bind:id="'x'+xNum++"
+      <li v-for="(item,xNum) in t" :key="item.t" v-bind:id="'t'+xNum++"
       @click='deleteTask(xNum)'>
         {{item }}
       </li>
@@ -27,26 +27,29 @@ export default {
   name: 'TasksBox',
   data() {
     return {
-      x: storage.getters.task,
+      t: storage.getters.task,
       xNum: 1,
       table: '',
     };
   },
+  mounted() {
+    this.t.shift();
+  },
   methods: {
     addTask() {
       const x = document.getElementById('taskBox__input').value;
-      this.x.push(x);
+      this.t.push(x);
       this.change();
     },
     deleteTask(xNum) {
-      const itemID = 'x' + (xNum - 1);
-      const x2 = this.x.splice(xNum - 1, 1);
+      const itemID = 't' + (xNum - 1);
+      const x2 = this.t.splice(xNum - 1, 1);
       this.change();
     },
     change() {
       let o = '';
-      for (let i = 0; i <= this.x.length - 1;) {
-        this.table = o + '||' + this.x[i];
+      for (let i = 0; i <= this.t.length - 1;) {
+        this.table = o + '||' + this.t[i];
         i += 1;
         o = this.table;
       }
