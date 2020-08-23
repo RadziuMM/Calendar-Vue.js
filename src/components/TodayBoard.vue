@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="" v-for="(item,todayNum) in todayCounter" :key="item"
+        <div v-for="(item,todayNum) in todayCounter" :key="item"
          v-bind:id="'today' + todayNum" >
         {{item}}
         </div>

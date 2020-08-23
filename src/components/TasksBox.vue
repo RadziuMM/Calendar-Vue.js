@@ -40,6 +40,7 @@ export default {
       const x = document.getElementById('taskBox__input').value;
       this.t.push(x);
       this.change();
+      document.getElementById('taskBox__input').value = '';
     },
     deleteTask(xNum) {
       const itemID = 't' + (xNum - 1);
