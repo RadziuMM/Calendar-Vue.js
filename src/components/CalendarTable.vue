@@ -226,8 +226,7 @@ export default {
       });
     },
     fetchGraphQL() {
-      // const { nick } = storage.getters;
-      const nick = 'Andrzej';
+      const { nick } = storage.getters;
       this.$apollo.query({
         query: getData,
         variables: {

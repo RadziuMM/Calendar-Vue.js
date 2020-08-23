@@ -4,6 +4,7 @@ mutation($name: String! $password: String!){
     password: $password
     data:""
     exist:true
+    Events:"**"
   }){
     id
   }

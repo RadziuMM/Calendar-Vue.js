@@ -1,7 +1,8 @@
 <template>
   <div class="home">
     <SideMenu />
-    FrontePejge
+    <TodayBoard />
+    {{date}}
   </div>
 </template>
 
@@ -9,6 +10,7 @@
 import getData from '../graphql/getData.gql';
 import store from '../store/index';
 import SideMenu from '../components/SideMenu.vue';
+import TodayBoard from '../components/TodayBoard.vue';
 
 let data;
 
@@ -16,8 +18,10 @@ export default {
   name: 'FrontPage',
   components: {
     SideMenu,
+    TodayBoard,
   },
   data: () => ({
+    date: 0,
   }),
   mounted() {
     const { nick } = store.getters;
@@ -30,8 +34,18 @@ export default {
       data = result.data.userBYname; // all feched info
       store.commit('loadsData', data);// send to store
     });
+    this.getDate();
   },
-  methods: {},
+  methods: {
+    getDate() {
+      const today = new Date();
+      const dd = today.getDate();
+      const mm = today.getMonth();
+      const yyyy = today.getFullYear();
+      // eslint-disable-next-line prefer-template
+      this.date = (dd) + '.' + (mm + 1) + '.' + yyyy;
+    },
+  },
 };
 </script>
 <style lang="scss" scooped>
