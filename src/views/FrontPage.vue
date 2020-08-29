@@ -3,37 +3,27 @@
     <SideMenu />
     <TodayBoard />
     {{date}}
+    <apollo ref="apollo"/>
   </div>
 </template>
 
 <script>
-import getData from '../graphql/getData.gql';
-import store from '../store/index';
 import SideMenu from '../components/SideMenu.vue';
 import TodayBoard from '../components/TodayBoard.vue';
-
-let data;
+import apollo from '../apollo.vue';
 
 export default {
   name: 'FrontPage',
   components: {
     SideMenu,
     TodayBoard,
+    apollo,
   },
   data: () => ({
     date: 0,
   }),
   mounted() {
-    const { nick } = store.getters;
-    this.$apollo.query({
-      query: getData,
-      variables: {
-        name: nick,
-      },
-    }).then((result) => {
-      data = result.data.userBYname; // all feched info
-      store.commit('loadsData', data);// send to store
-    });
+    this.$refs.apollo.fetch('all', 0);
     this.getDate();
   },
   methods: {

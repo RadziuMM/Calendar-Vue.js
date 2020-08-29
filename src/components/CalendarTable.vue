@@ -23,16 +23,19 @@
         <button @click="addEvent()">ADD</button>
       </div>
     </div>
+    <apollo ref="apollo"/>
   </div>
 </template>
 
 <script>
 import storage from '../store/index';
-import getData from '../graphql/getData.gql';
-import updateUser from '../graphql/updateUser.gql';
+import apollo from '../apollo.vue';
 
 export default {
   name: 'CalendarTable',
+  components: {
+    apollo,
+  },
   data() {
     return {
       x: 0,
@@ -47,9 +50,6 @@ export default {
       focusDate: '',
       focusId: 0,
     };
-  },
-  beforeMount() {
-    this.fetchGraphQL();
   },
   mounted() {
     this.getDays();
@@ -183,13 +183,7 @@ export default {
         i += 1;
       }
 
-      this.$apollo.mutate({
-        mutation: updateUser,
-        variables: {
-          id: storage.getters.id,
-          Events: x,
-        },
-      });
+      this.$refs.apollo.mutate('events', x);
     },
     deleteEvent(event) {
       // eslint-disable-next-line prefer-template
@@ -217,29 +211,9 @@ export default {
         i += 1;
       }
 
-      this.$apollo.mutate({
-        mutation: updateUser,
-        variables: {
-          id: storage.getters.id,
-          Events: x,
-        },
-      });
+      this.$refs.apollo.mutate('events', x);
     },
-    fetchGraphQL() {
-      const { nick } = storage.getters;
-      this.$apollo.query({
-        query: getData,
-        variables: {
-          name: nick,
-        },
-      }).then((result) => {
-        const data = result.data.userBYname;
-        storage.commit('fetchData', data.Events);
-        this.cData = storage.getters.cData;
-        const array = this.cData.split('**');
-        this.fetchedData = array;
-      });
-    },
+
   },
 };
 </script>

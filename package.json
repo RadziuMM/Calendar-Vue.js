@@ -13,6 +13,7 @@
     "core-js": "^3.6.5",
     "graphql-client": "^2.0.1",
     "graphql-tag": "^2.10.3",
+    "node-sass": "^4.14.1",
     "password-hash": "^1.2.2",
     "tailwindcss": "^1.7.3",
     "vue": "^2.6.11",

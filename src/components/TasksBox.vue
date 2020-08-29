@@ -2,13 +2,14 @@
   <div class="Tasks-Box">
      <div class="Tasks-Box__Title"> Task List </div>
      <ul class="Tasks-Box__TaskArray">
-      <li v-for="(item,xNum) in t" :key="item.t" v-bind:id="'t'+xNum++"
+      <li v-for="(item,xNum) in tasks" :key="item.t" v-bind:id="'t'+xNum++"
       @click='deleteTask(xNum)'>
         {{item }}
       </li>
       <input class="TasksBox__input" id="taskBox__input"/>
       <button class="button__taskBox" @click="addTask">ADD</button>
       </ul>
+      <apollo ref="apollo"/>
   </div>
 </template>
 
@@ -22,46 +23,40 @@ import Vue from 'vue';
 import storage from '../store/index';
 import updateUser from '../graphql/updateUser.gql';
 import routes from '../router/index';
+import apollo from '../apollo.vue';
 
 export default {
   name: 'TasksBox',
+  components: {
+    apollo,
+  },
   data() {
     return {
-      t: storage.getters.task,
+      tasks: storage.getters.task,
       xNum: 1,
       table: '',
     };
   },
-  mounted() {
-    this.t.shift();
-  },
   methods: {
     addTask() {
       const x = document.getElementById('taskBox__input').value;
-      this.t.push(x);
+      this.tasks.push(x);
       this.change();
       document.getElementById('taskBox__input').value = '';
     },
     deleteTask(xNum) {
       const itemID = 't' + (xNum - 1);
-      const x2 = this.t.splice(xNum - 1, 1);
+      this.tasks.splice(xNum - 1, 1);
       this.change();
     },
     change() {
       let o = '';
-      for (let i = 0; i <= this.t.length - 1;) {
-        this.table = o + '||' + this.t[i];
+      for (let i = 0; i <= this.tasks.length - 1;) {
+        this.table = o + '||' + this.tasks[i];
         i += 1;
         o = this.table;
       }
-
-      this.$apollo.mutate({
-        mutation: updateUser,
-        variables: {
-          id: storage.getters.id,
-          data: this.table,
-        },
-      });
+      this.$refs.apollo.mutate('taskList', this.table);
     },
   },
 };

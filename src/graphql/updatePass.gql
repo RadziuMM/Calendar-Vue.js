@@ -1,0 +1,12 @@
+mutation($id: ID! $password:String){
+  updateUser(
+    id: $id
+    exist: true
+    password : $password
+  ){
+    id
+    exist
+    data
+    Events
+  }
+}

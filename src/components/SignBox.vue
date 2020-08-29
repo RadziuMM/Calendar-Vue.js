@@ -1,76 +1,56 @@
 <template>
   <div class='Box'>
     <div class="Login">Login</div>
-    <form autocomplete="off">
+    <form>
     <input placeholder="nickname" onfocus="this.placeholder = ''"
     onblur="this.placeholder = 'nickname'" id="nick" required/>
     <input placeholder="password" onfocus="this.placeholder = ''"
-    onblur="this.placeholder = 'password'" type=password id="pass" required />
+    onblur="this.placeholder = 'password'" type=password id="pass" required/>
     <div id="mess2"></div>
       <div><button class="SButton" @click="log()">Sign in</button></div>
       <span class="nregister">Not have account?</span>
       <span class="register" @click="goToRegister()">Register now</span>
     </form>
+    <apollo ref="apollo"/>
   </div>
 </template>
 
 <script>
-import routes from '../router/index';
-import store from '../store/index';
-import userByName from '../graphql/userByName.gql';
+import router from '../router/index';
+import apollo from '../apollo.vue';
 
 const passwordHash = require('password-hash');
 
 export default {
   name: 'SignBox',
+  components: {
+    apollo,
+  },
   methods: {
     goToRegister() {
-      routes.push({ path: 'Register' });
+      router.push({ path: 'Register' });
     },
     log() {
       document.body.style.cursor = 'progress';
       const nick = document.getElementById('nick').value;
       const pass = document.getElementById('pass').value;
-      const x = document.getElementById('mess2');
-      this.$apollo.query({
-        query: userByName,
-        variables: {
-          name: nick,
-        },
-      }).then((result) => {
-        let Apass;
-        try {
-          Apass = result.data.userBYname.password;
-          if (passwordHash.verify(pass, Apass)) {
-            this.$apollo.query({
-              query: userByName,
-              variables: {
-                name: nick,
-              },
-            }).then(() => { // corect password
-              store.commit('changenick', nick);
-              document.body.style.cursor = 'default';
-              routes.push({ path: 'FrontPage' });
-            });
-          } else { // wrong password
-            x.innerHTML = 'Wrong nickname or password!';
-            document.body.style.cursor = 'default';
-            // Clear password
-            Apass = '*******';
-          }
-        } catch (error) { // wrong user name
-          x.innerHTML = 'Wrong nickname or password!';
+      const feedBack = document.getElementById('mess2');
+      feedBack.innerHTML = '';
+      this.$refs.apollo.fetch('pass', nick);
+
+      setTimeout(() => {
+        if (passwordHash.verify(pass, this.$refs.apollo.fPassword)) {
+          document.body.style.cursor = 'default';
+          router.push({ path: 'FrontPage' });
+        } else {
+          feedBack.innerHTML = 'Wrong nickname or password!';
           document.body.style.cursor = 'default';
         }
-      // eslint-disable-next-line no-return-assign
-      }).catch(() => ( // Database conetion problem!
-        this.databaseerror()
-      ));
-    },
-    databaseerror() {
-      const x = document.getElementById('mess2');
-      x.innerHTML = 'Database not connected!Try again later!';
-      document.body.style.cursor = 'default';
+        if (this.$refs.apollo.dataBaseError === true) {
+          feedBack.innerHTML = 'Database not connected!Try again later!';
+          document.body.style.cursor = 'default';
+        }
+      }, 1000);
     },
   },
 };

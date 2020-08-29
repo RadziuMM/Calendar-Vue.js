@@ -9,7 +9,6 @@
 
 <script>
 import storage from '../store/index';
-import getData from '../graphql/getData.gql';
 
 export default {
   name: 'TodayBoard',
@@ -25,18 +24,8 @@ export default {
   },
   methods: {
     fetch() {
-      const { nick } = storage.getters;
-      this.$apollo.query({
-        query: getData,
-        variables: {
-          name: nick,
-        },
-      }).then((result) => {
-        const data = result.data.userBYname;
-        storage.commit('fetchData', data.Events);
-        this.todayData = data.Events;
-        const array = this.todayData.split('**');
-        array.shift();
+      setTimeout(() => {
+        const array = storage.getters.calendarData;
         this.todayCounter = [];
 
         const today = new Date();
@@ -54,7 +43,7 @@ export default {
           if (accDate === array2[0]) { this.todayCounter.push(array2[1]); }
           i += 1;
         }
-      });
+      }, 1000);
     },
   },
 };
