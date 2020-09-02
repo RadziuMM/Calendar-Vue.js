@@ -1,27 +1,37 @@
 <template>
-  <div class="calendar">
-    <div class="calendar__table">
-        <div class="calendar__table--day" v-for="(item,xNum) in x" :key="item.x"
+  <div class="CT__wrapper">
+    <div class="border border-pink-600 calendar__table">
+        <div class="float-left text-center cursor-pointer
+        hover:bg-gray-300 duration-1000 calendar__table--day"
+         v-for="(item,xNum) in x" :key="item.x"
          v-bind:id="'x' + xNum" @click="popWindow(xNum)">
         {{(xNum + 1)-calendarRow}}
         </div>
     </div>
-    <div>
-      <button @click="nextMM()">+</button>
-      <div>{{focusedMM}} {{focusedYYYY}}</div>
-      <button @click="previousMM()">-</button>
+    <div class="float-right w-64 md:mr-5 lg:mr-10 xl:mr-16 xl:mr-40 mt-5">
+      <button class="float-right border-pink-600 border rounded-lg w-12 hover:bg-pink-600 mr-10"
+      @click="nextMM()">+</button>
+      <div class="float-right w-24 text-center">{{focusedMM}} {{focusedYYYY}}</div>
+      <button class="float-right border-pink-600 border rounded-lg w-12 hover:bg-pink-600"
+      @click="previousMM()">-</button>
     </div>
-    <div class="popWindow" id="popWindow">
-      <div class="exit" @click="exit()">X</div>
-      <ul class="eventBoard">
-        <li class="singleEvent" v-for="item in calendarData" :key="item" @click="deleteEvent(item)">
+    <div class="popWindow bg-black border border-pink-600 rounded-lg text-white
+    bg-gradient-to-r from-gray-900 to-black text-center" id="popWindow">
+      <span class="cursor-pointer fixed right-0 mr-2 text-4xl text-pink-600"
+       @click="exit()">&#10799;</span>
+      <span class="text-xl text-pink-600">{{this.focusDate}}</span>
+      <ul class="mt-16">
+        <li class="hover:text-pink-600 cursor-pointer"
+        v-for="item in calendarData" :key="item" @click="deleteEvent(item)">
           {{ item }}
         </li>
       </ul>
-      <div>
-        <input type="text" id="newEvent__input"/>
-        <button @click="addEvent()">ADD</button>
-      </div>
+      <form class="mt-10">
+        <input type="text" id="newEvent__input" placeholder="add Event!" class="mt-2 p-1 text-center
+        text-black outline-none"/>
+        <button class="border-pink-600 border rounded-lg w-12 hover:bg-pink-600 ml-2"
+        @click="addEvent()">ADD</button>
+      </form>
     </div>
     <apollo ref="apollo"/>
   </div>
@@ -104,10 +114,12 @@ export default {
     markAccDay() {
       // eslint-disable-next-line prefer-template
       const dayVar = 'x' + ((this.accMMCalendarRow + this.accDay) - 1);
-      if (this.focusedMM === 8) {
-        document.getElementById(dayVar).style.backgroundColor = 'white';
+      const today = new Date();
+      const mm = today.getMonth();
+      if (this.focusedMM - 1 === mm) {
+        document.getElementById(dayVar).style.border = '#d53f8c 1px solid';
       } else {
-        document.getElementById(dayVar).style.backgroundColor = 'transparent';
+        document.getElementById(dayVar).style.border = 'none';
       }
     },
     nextMM() {
@@ -219,28 +231,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-.calendar__table--day{
-  float:left;
-  width:11vw;
-  height:5vh;
-  text-align:center;
-  padding-top:5vh;
-  padding-bottom: 2vh;
-  transition: 1s;
-}
-.calendar__table--day:hover{
-  opacity: 0.4;
-  background-color: darkgray;
-  cursor: pointer;
+.CT__wrapper{
+  margin-left: 19vw;
+  margin-top: 0;
+  @media (min-width: 768px) {
+    margin-left: 15vw;
+    margin-top: 12vh;
+   }
 }
 .calendar__table{
-  border:2px black solid;
-  height:72vh;
-  width:77vw;
-  float:right;
+  height:60.4vh;
+  width:78vw;
+   @media (min-width: 768px) {
+     width:77.28vw;
+   }
+}
+.calendar__table--day{
+  height:10vh;
+  width:11vw;
 }
 #x0{
+  color:red;
+}
+#x7{
   color:red;
 }
 #x7{
@@ -261,32 +274,11 @@ export default {
 .popWindow{
   position: fixed;
   z-index: 10;
-  height: 80vh;
-  width: 80vw;;
-  background-color: whitesmoke;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
   display: none;
-  border: 1px black solid;
-  border-radius: 3vh;
-}
-.exit{
-  cursor: pointer;
-  float: right;
-  padding: 2vw;
-}
-.eventBoard {
-  list-style: none;
-  margin-top:10vh;
-  margin-left: 0;
-  margin-right: 0;
-}
-.singleEvent{
-  width:90%;
-}
-.singleEvent:hover{
-  background-color: red;
-  cursor: pointer;
+  height: 80vh;
+  width: 95vw;;
 }
 </style>

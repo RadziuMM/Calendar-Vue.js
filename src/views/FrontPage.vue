@@ -1,8 +1,11 @@
 <template>
-  <div class="home">
+  <div>
     <SideMenu />
+    <div class="text-center date text-pink-600 float-left text-3xl">
+      Have a nice day!<br/>
+      <span class="text-5xl">Today is {{date}}</span>
+      </div>
     <TodayBoard />
-    {{date}}
     <apollo ref="apollo"/>
   </div>
 </template>
@@ -38,14 +41,28 @@ export default {
   },
 };
 </script>
-<style lang="scss" scooped>
-  html{
-    background: rgb(204,164,19);
-    background: linear-gradient(106deg, rgba(204,164,19,1) 0%, rgba(44,94,151,1) 60%,
-     rgba(55,50,154,1) 100%);
-    background-size: cover;
-    background-repeat:no-repeat;
-    height: 100%;
-    width: 100%;
+<style lang="scss" scoped>
+.date{
+  z-index:-1;
+  width: 78vw;
+  position: relative;
+  left:20vw;
+  @media (min-width: 768px) {
+    margin-top: 10vh;
+    left:20vw;
+    min-height: 50vh;
+    padding-top:12vh;
+    width: 30vw;
+   }
+  @media (min-width: 1024px) {
+    margin-top: 10vh;
+    min-height: 50vh;
+    padding-top:12vh;
   }
+  @media (min-width: 1280px){
+    margin-top: 10vh;
+    min-height: 50vh;
+    padding-top:12vh;
+   }
+}
 </style>

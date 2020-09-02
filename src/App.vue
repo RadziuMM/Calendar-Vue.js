@@ -1,28 +1,10 @@
 <template>
-  <div id="app">
+  <div id="app" class="h-screen bg-gradient-to-r from-black to-gray-900 fixed w-full h-screen
+   text-white">
     <router-view/>
   </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+@import url('https://fonts.googleapis.com/css2?family=Gayathri:wght@100&display=swap');
 </style>

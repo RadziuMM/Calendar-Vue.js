@@ -1,6 +1,7 @@
 <template>
-    <div>
-        <div v-for="(item,todayNum) in todayCounter" :key="item"
+    <div class="ToB__wrapper text-pink-600 text-center float-left">
+    Here you have everything you have planned for today :
+        <div class="text-2xl" v-for="(item,todayNum) in todayCounter" :key="item"
          v-bind:id="'today' + todayNum" >
         {{item}}
         </div>
@@ -49,3 +50,23 @@ export default {
 };
 
 </script>
+<style lang="scss" scoped>
+.ToB__wrapper{
+  margin-left:20vw;
+  margin-top: 2vh;
+  min-height: 50vh;
+  width: 78vw;
+  @media (min-width: 768px) {
+    margin-left:25vw;
+    margin-top: 10vh;
+    width: 40vw;
+   }
+  @media (min-width: 1024px) {
+    min-height: 50vh;
+
+  }
+  @media (min-width: 1280px){
+    min-height: 50vh;
+   }
+}
+</style>

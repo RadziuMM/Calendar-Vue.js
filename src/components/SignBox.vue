@@ -1,16 +1,21 @@
 <template>
-  <div class='Box'>
-    <div class="Login">Login</div>
-    <form>
-    <input placeholder="nickname" onfocus="this.placeholder = ''"
-    onblur="this.placeholder = 'nickname'" id="nick" required/>
-    <input placeholder="password" onfocus="this.placeholder = ''"
-    onblur="this.placeholder = 'password'" type=password id="pass" required/>
-    <div id="mess2"></div>
-      <div><button class="SButton" @click="log()">Sign in</button></div>
-      <span class="nregister">Not have account?</span>
-      <span class="register" @click="goToRegister()">Register now</span>
-    </form>
+  <div class='border-solid border border-pink-600 rounded-lg border-opacity-75 text-white
+  SB__wrapper'>
+    <div class=" mt-24 md:mt-32 lg:mt-16 text-center font-bold text-2xl tracking-wide">LOGIN</div>
+      <form class="text-center">
+        <input placeholder="nickname" onfocus="this.placeholder = ''"
+          onblur="this.placeholder = 'nickname'" id="nick" required
+          class="mt-2 p-1 rounded-full text-center text-black outline-none"/>
+        <input placeholder="password" onfocus="this.placeholder = ''"
+          onblur="this.placeholder = 'password'" type=password id="pass" required
+          class="mt-2 p-1 rounded-full text-center text-black outline-none"/>
+        <div id="mess" class="text-red-700"></div>
+          <div><button class="mt-2 h-6 w-24 btn border-solid border border-pink-600
+          rounded-lg border-opacity-75 hover:bg-pink-600" @click="log()">Sign in</button></div>
+          <span >Not have account? </span>
+          <span class="hover:text-pink-600 cursor-pointer"
+           @click="goToRegister()">Register now</span>
+      </form>
     <apollo ref="apollo"/>
   </div>
 </template>
@@ -34,7 +39,7 @@ export default {
       document.body.style.cursor = 'progress';
       const nick = document.getElementById('nick').value;
       const pass = document.getElementById('pass').value;
-      const feedBack = document.getElementById('mess2');
+      const feedBack = document.getElementById('mess');
       feedBack.innerHTML = '';
       this.$refs.apollo.fetch('pass', nick);
 
@@ -55,95 +60,32 @@ export default {
   },
 };
 </script>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
-.Box{
-  font-family: 'Roboto Condensed', sans-serif;
-  height: auto;
-  width: 45vh;
-  padding-bottom:20vh;
-  background: rgb(204,164,19);
-  background: linear-gradient(160deg, rgba(204,164,19,1) 22%,
-   rgba(44,94,151,1) 64%, rgba(55,50,154,1) 100%);
-  background-size: cover;
-  background-repeat:no-repeat;
-  border:2px ridge black;
-  box-shadow: 0px 0px 30px 5px rgba(0,0,0,0.75);
-  border-radius: 10px;
-  margin-top:9vh;
-  margin-left:10vh;
-  float: left;
-}
-input{
-  letter-spacing: 0.5px;
-  font-size: 16px;
-  font-family: 'Roboto Condensed', sans-serif;
-  margin-top:5%;
-  height:6%;
-  width: 80%;
-  text-align: center;
-  border:none;
-  background: none;
-  border-bottom:solid 0.5px black;
-  outline: none;
-  transition: ease-in-out 1s;
-  text-shadow: 2px 1px 2px rgb(82, 79, 78);
-}
-
-input:hover{
-  border-bottom: yellow 0.5px solid;
-  cursor: default;
-}
-input:focus{
-  border-bottom: yellow 0.5px solid;
-  cursor: default;
-  box-shadow: 0px 17px 20px -9px rgba(0,0,0,0.75);
-}
-::placeholder{
-  color:black
-}
-.SButton{
-  margin-top:5%;
-  padding: 5px;
-  background: rgba(204,164,19,1);
-  border-radius: 5px;
-  padding-left: 5%;
-  padding-right: 5%;
-  transition: ease-in 1s;
-  outline: none;
-}
-.SButton:hover{
-  background: rgb(216, 178, 39);
-  cursor: pointer;
-}
-.SButton:focus{
-  background: rgb(240, 211, 107);
-}
-.register{
-  letter-spacing: 0.5px;
-  font-size: 10px;
-  transition: ease-in-out 1s;
-}
-.register:hover{
-  color:red;
-  cursor: pointer;
-}
-.nregister{
-  letter-spacing: 0.5px;
-  font-size: 10px;
-}
-#mess2{
-  color: red;
-  font-size: 12px;
-}
-input:first-child{
-  margin-top:10%;
-}
-.Login{
-  font-size: 2vw;
-  margin-top: 10vh;
-  color: rgb(25, 49, 116);
-  text-shadow: 3px 1px 2px #6b6467;
-}
+<style lang="scss" scoped>
+ .SB__wrapper{
+   height: 75vh;
+   width: 80vw;
+   margin-left: 10vw;
+   margin-top: 5vh;
+  @media (min-width: 768px) {
+   height: 80vh;
+   width: 80vw;
+   margin-left: 10vw;
+   margin-top: 10vh;
+   }
+  @media (min-width: 1024px) {
+   height: 70vh;
+   width: 25vw;
+   margin-left: 5vw;
+   margin-top: 15vh;
+  }
+  @media (min-width: 1280px){
+   height: 60vh;
+   width: 20vw;
+   margin-left: 5vw;
+   margin-top: 20vh;
+   }
+ }
+ input{
+   width: 85%;
+ }
 </style>

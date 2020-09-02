@@ -1,28 +1,27 @@
 <template>
-  <div class="Tasks-Box">
-     <div class="Tasks-Box__Title"> Task List </div>
-     <ul class="Tasks-Box__TaskArray">
+  <div class="TB__wrapper border border-pink-600 rounded-lg text-center text-xl">
+     <div class="text-4xl text-pink-600 border-b border-pink-600"> Task List </div>
+     <ul class="">
       <li v-for="(item,xNum) in tasks" :key="item.t" v-bind:id="'t'+xNum++"
-      @click='deleteTask(xNum)'>
+      @click='deleteTask(xNum)' class="bg-gradient-to-r from-black to-gray-900
+      hover:bg-gradient-to-r hover:from-gray-900 hover:to-black border-b
+      border-pink-600 hover:text-pink-600 cursor-pointer">
         {{item }}
       </li>
-      <input class="TasksBox__input" id="taskBox__input"/>
-      <button class="button__taskBox" @click="addTask">ADD</button>
+      <form class="mt-12 mb-12">
+      <input class="text-black text-center outline-none mr-4"
+      placeholder="add Task" id="taskBox__input"/>
+      <button class=" btn border-solid border border-pink-600
+          rounded-lg border-opacity-75 hover:bg-pink-600" @click="addTask">add</button>
+      </form>
       </ul>
       <apollo ref="apollo"/>
   </div>
 </template>
 
 <script>
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-use-before-define */
-/* eslint-disable prefer-const */
 /* eslint-disable prefer-template */
-/* eslint-disable no-undef */
-import Vue from 'vue';
 import storage from '../store/index';
-import updateUser from '../graphql/updateUser.gql';
-import routes from '../router/index';
 import apollo from '../apollo.vue';
 
 export default {
@@ -45,7 +44,6 @@ export default {
       document.getElementById('taskBox__input').value = '';
     },
     deleteTask(xNum) {
-      const itemID = 't' + (xNum - 1);
       this.tasks.splice(xNum - 1, 1);
       this.change();
     },
@@ -62,51 +60,30 @@ export default {
 };
 </script>
 
-<style>
-  .Tasks-Box{
-    position: absolute;
-    top:8vh;
-    right: 10vw;
-    width:32vw;
-    border: solid 2px black;
-    border-radius: 20px;
-    background: rgb(18, 78, 78);
-    box-shadow: 0px 0px 19px 9px rgba(0,0,0,0.75);
-    color: black;
+<style lang="scss" scoped>
+.TB__wrapper{
+  width: 80vw;
+  min-height: 60vh;
+  margin-left: 19vw;
+  input{
+    width: 60%;
   }
-  .Tasks-Box__Title{
-    margin-top: 5%;
-    text-decoration: underline;
-    font-size: 20px;
+  margin-right: 0vh;
+  @media (min-width: 768px) {
+    width: 80vw;
+    min-height: 50vh;
+    margin-left: 15vw;
+    margin-top: 12vw;
+   }
+  @media (min-width: 1024px) {
+    width: 40vw;
+    margin-top: 5vh;
+    margin-left: 30vw;
   }
-  .Tasks-Box__TaskArray{
-    text-align: left;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  .Tasks-Box__TaskArray>li{
-    text-align:center;
-    border-top:solid black 1px;
-    width: 90%;
-    margin: 0 5% 0 5%;
-    transition: 1s ease-in-out;
-  }
-  .Tasks-Box__TaskArray>li:hover{
-    background-color:white;
-    cursor: pointer;
-  }
-  .Tasks-Box__TaskArray>li:last-child{
-    padding-bottom: 5px;
-  }
-  .button__taskBox{
-    float: left;
-    margin-top:1vh
-  }
-  .TasksBox__input{
-    width:70%;
-    float: left;
-    margin-bottom:5px;
-    margin-left:2vw;
-  }
+  @media (min-width: 1280px){
+    width: 40vw;
+    margin-top: 5vh;
+    margin-right: 60vh;
+   }
+}
 </style>

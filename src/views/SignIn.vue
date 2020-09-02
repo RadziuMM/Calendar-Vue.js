@@ -1,9 +1,11 @@
 <template>
-  <div class="home">
-    <div class="quote">"The two most poweful warriors are patience and time"
-       <span class="quote__author">-Leo Tolstoy, War and Peace</span></div>
-    <Sign-box />
-    <img class="cal" src="../assets/calendar.png" alt="">
+  <div class="SI__wrapper">
+    <Sign-box class="float-left"/>
+    <q class="float-left ml-24 text-pink-600 text-3xl login__t">
+      Don't be fooled by the calendar.<br />
+      There are only as many days in the year as you make use of.
+      </q>
+      <div class="float-right mr-16 text-pink-600 text-3xl login__a">- Charles Richards</div>
   </div>
 </template>
 
@@ -17,32 +19,27 @@ export default {
   },
 };
 </script>
-<style lang="scss" scooped>
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@1,200&display=swap');
-  html{
-    background: rgb(204,164,19);
-    background: linear-gradient(106deg, rgba(204,164,19,1) 0%, rgba(44,94,151,1) 60%,
-     rgba(55,50,154,1) 100%);
-    background-size: cover;
-    background-repeat:no-repeat;
-    height: 100%;
-    width: 100%;
+<style lang="scss">
+.SI__wrapper{
+  font-family: 'Gayathri', sans-serif;
+}
+.login__t{
+  display: none;
+  @media (min-width: 1024px) {
+   width: 50vw;
+   margin-top: 15vh;
+   margin-bottom: 5vh;
+   display: inline;
   }
-  .cal{
-    width: 30vw;
-    float: left;
-    margin-top: 10vh;
-    margin-left: 20vw;
+  @media (min-width: 1280px){
+   width: 60vw;
+   margin-top: 20vh;
+   }
+}
+.login__a{
+   display: none;
+  @media (min-width: 1024px) {
+   display: inline;
   }
-  .quote{
-    font-size:5vh;
-    font-family: 'Raleway', sans-serif;
-    color: black;
-  }
-  .quote__author{
-    display: block;
-    color: rgb(36, 35, 35);
-    font-size: 4vh;
-    padding-left: 60vw;
-  }
+}
 </style>
