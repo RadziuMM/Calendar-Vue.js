@@ -71,48 +71,36 @@ export default {
   methods: {
     getDays() {
       const today = new Date();
-      const dd = today.getDate();
-      const mm = today.getMonth();
-      const yyyy = today.getFullYear();
+      this.accDay = today.getDate();
+      this.focusedMM = today.getMonth() + 1;
+      this.focusedYYYY = today.getFullYear();
 
-      this.accDay = dd;
-      this.focusedMM = mm + 1;
-      this.focusedYYYY = yyyy;
-      const x = new Date(yyyy, mm, 0).getDate();
-      this.x = x;
+      this.calendarRow = new Date(this.focusedYYYY, this.focusedMM - 1).getDay();
+      this.x = (new Date(this.focusedYYYY, this.focusedMM - 1, 0).getDate()) + this.calendarRow;
 
-      const calendarRow = new Date(yyyy, mm).getDay();
-      this.x = x + calendarRow;
-      this.calendarRow = calendarRow;
-      this.accMMCalendarRow = calendarRow;
+      this.accMMCalendarRow = this.calendarRow;
     },
     clearMinusDays() {
-      const x = this.calendarRow;
-
       for (let i = 1; i < 7;) {
-        const acc = `x${i - 1}`;
-        document.getElementById(acc).innerHTML = i - this.calendarRow;
-        document.getElementById(acc).style.opacity = '1';
-        document.getElementById(acc).style.cursor = 'pointer';
+        const x = document.getElementById(`x${i - 1}`);
+        x.innerHTML = i - this.calendarRow;
+        x.style.opacity = '1';
+        x.style.cursor = 'pointer';
         i += 1;
       }
-
-      for (let i = 1; i < x + 1;) {
-        const acc = `x${i - 1}`;
-        document.getElementById(acc).innerHTML = '';
-        document.getElementById(acc).style.opacity = '0';
-        document.getElementById(acc).style.cursor = 'auto';
+      for (let i = 1; i < this.calendarRow + 1;) {
+        const x = document.getElementById(`x${i - 1}`);
+        x.innerHTML = '';
+        x.style.opacity = '0';
+        x.style.cursor = 'auto';
         i += 1;
       }
     },
     markAccDay() {
-      const dayVar = `x${(this.accMMCalendarRow + this.accDay) - 1}`;
-      const today = new Date();
-      const mm = today.getMonth();
-      if (this.focusedMM - 1 === mm) {
-        document.getElementById(dayVar).style.border = '#d53f8c 1px solid';
+      if (this.focusedMM - 1 === new Date().getMonth()) {
+        document.getElementById(`x${(this.accMMCalendarRow + this.accDay) - 1}`).style.border = '#d53f8c 1px solid';
       } else {
-        document.getElementById(dayVar).style.border = 'none';
+        document.getElementById(`x${(this.accMMCalendarRow + this.accDay) - 1}`).style.border = 'none';
       }
     },
     nextMM() {
@@ -132,11 +120,9 @@ export default {
       this.onChange();
     },
     onChange() {
-      const x = new Date(this.focusedYYYY, this.focusedMM - 1, 0).getDate();
-      this.x = x;
-      const calendarRow = new Date(this.focusedYYYY, this.focusedMM - 1).getDay();
-      this.x = x + calendarRow;
-      this.calendarRow = calendarRow;
+      this.x = new Date(this.focusedYYYY, this.focusedMM - 1, 0).getDate();
+      this.calendarRow = new Date(this.focusedYYYY, this.focusedMM - 1).getDay();
+      this.x += this.calendarRow;
       this.clearMinusDays();
       this.markAccDay();
     },
@@ -144,23 +130,18 @@ export default {
       if (id > (this.calendarRow - 1)) {
         this.focusId = id;
         document.getElementById('popWindow').style.display = 'inline';
-        let focusDate = `${id - this.calendarRow + 1}.${this.focusedMM}.${this.focusedYYYY}      `;
-        focusDate = focusDate.substring(0, 10);
-        focusDate = String(focusDate);
-        this.focusDate = focusDate;
+        const focusDate = `${id - this.calendarRow + 1}.${this.focusedMM}.${this.focusedYYYY}      `;
+        this.focusDate = String(focusDate.substring(0, 10));
         this.calendarData = [];
         this.calendarData.push('Free time!Plan sth for this day!');
         const array = [];
         for (let i = 0; i < this.fetchedData.length;) {
-          let dataOfEvent = this.fetchedData[i].substring(0, 10);
-          dataOfEvent = String(dataOfEvent);
-          if (focusDate === dataOfEvent) {
+          const dataOfEvent = String(this.fetchedData[i].substring(0, 10));
+          if (this.focusDate === dataOfEvent) {
             const data = this.fetchedData[i].split('||');
-            const int = 1;
-            array.push(data[int]);
+            array.push(data[1]);
             this.calendarData = array;
           }
-
           i += 1;
         }
       }
@@ -171,11 +152,15 @@ export default {
     addEvent() {
       const date = this.focusDate;
       const event = document.getElementById('newEvent__input').value;
-      const newEvent = `${date}   || ${event}`;
-      this.popWindow(this.focusId);
-      document.getElementById('newEvent__input').value = '';
-      storage.commit('addEvent', newEvent);
-      this.update();
+      if (event === '') {
+        // console.log('');
+      } else {
+        const newEvent = `${date}   || ${event}`;
+        this.popWindow(this.focusId);
+        document.getElementById('newEvent__input').value = '';
+        storage.commit('addEvent', newEvent);
+        this.update();
+      }
     },
     deleteEvent(event) {
       let focusEvent = `${this.focusDate}   ||${event}`;
@@ -203,7 +188,6 @@ export default {
         x += y;
         i += 1;
       }
-
       this.$refs.apollo.mutate('events', x);
     }
     ,

@@ -1,13 +1,13 @@
 <template>
-    <div class="h-screen bg-white w-16 fixed slide top-0">
+    <div class="h-screen bg-white w-12 fixed slide top-0">
         <div class="text-red-900">
             <div>
-                <div class="bg-pink-600 w-10 h-px mt-5 ml-3"></div>
-                <div class="bg-pink-600 w-10 h-px mt-2 ml-3"></div>
-                <div class="bg-pink-600 w-10 h-px mt-2 ml-3"></div>
+                <div class="bg-pink-600 w-8 h-px mt-5 ml-2"></div>
+                <div class="bg-pink-600 w-8 h-px mt-2 ml-2"></div>
+                <div class="bg-pink-600 w-8 h-px mt-2 ml-2"></div>
             </div>
             <nav class="w-0 transition bg-gradient-to-r from-black to-gray-900
-            fixed h-full text-pink-600 top-0 ml-16 text-xl
+            fixed h-full text-pink-600 top-0 ml-12 text-xl
             nav border-pink-600 border text-center">
                 <div class="hide hidden cursor-pointer h-12 hover:bg-pink-200
                 border-t border-b border-pink-600" @click="GoToFrontPage()">Today</div>
