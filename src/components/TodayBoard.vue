@@ -1,5 +1,5 @@
 <template>
-    <div class="ToB__wrapper text-pink-600 text-center text-2xl float-left">
+    <div class="ToB__wrapper text-pink-600 text-center text-xl float-left">
     <span class=""> Here you have everything you have planned for today :</span>
         <div class="text-3xl" v-for="(item,todayNum) in todayCounter" :key="item"
          v-bind:id="'today' + todayNum" >
