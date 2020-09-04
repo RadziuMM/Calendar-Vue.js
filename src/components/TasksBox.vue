@@ -62,6 +62,7 @@ export default {
 
 <style lang="scss" scoped>
 .TB__wrapper{
+  font-family: 'Gayathri', sans-serif;
   width: 80vw;
   min-height: 60vh;
   margin-left: 19vw;

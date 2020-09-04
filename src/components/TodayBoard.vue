@@ -1,7 +1,7 @@
 <template>
-    <div class="ToB__wrapper text-pink-600 text-center float-left">
-    Here you have everything you have planned for today :
-        <div class="text-2xl" v-for="(item,todayNum) in todayCounter" :key="item"
+    <div class="ToB__wrapper text-pink-600 text-center text-2xl float-left">
+    <span class=""> Here you have everything you have planned for today :</span>
+        <div class="text-3xl" v-for="(item,todayNum) in todayCounter" :key="item"
          v-bind:id="'today' + todayNum" >
         {{item}}
         </div>
@@ -33,8 +33,7 @@ export default {
         const dd = today.getDate();
         const mm = today.getMonth();
         const yyyy = today.getFullYear();
-        // eslint-disable-next-line prefer-template
-        let accDate = (dd) + '.' + (mm + 1) + '.' + yyyy + '      ';
+        let accDate = `${dd}.${mm + 1}.${yyyy}      `;
         accDate = accDate.substring(0, 10);
         accDate = String(accDate);
         for (let i = 0; i < array.length;) {
@@ -52,6 +51,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .ToB__wrapper{
+  font-family: 'Gayathri', sans-serif;
   margin-left:20vw;
   margin-top: 2vh;
   min-height: 50vh;

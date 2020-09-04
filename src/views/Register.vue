@@ -20,7 +20,7 @@ export default {
 
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .RB__wrapper{
   font-family: 'Gayathri', sans-serif;
 }

@@ -8,16 +8,16 @@
             </div>
             <nav class="w-0 transition bg-gradient-to-r from-black to-gray-900
             fixed h-full text-pink-600 top-0 ml-16 text-xl
-            nav border-pink-600 border">
-                <div class="hide hidden cursor-pointer h-8 hover:bg-pink-200
+            nav border-pink-600 border text-center">
+                <div class="hide hidden cursor-pointer h-12 hover:bg-pink-200
                 border-t border-b border-pink-600" @click="GoToFrontPage()">Today</div>
-                <div class="hide hidden cursor-pointer h-8 hover:bg-pink-200
+                <div class="hide hidden cursor-pointer h-12 hover:bg-pink-200
                 border-b border-pink-600" @click="GoToCalendar()">Calendar</div>
-                <div class="hide hidden cursor-pointer h-8 hover:bg-pink-200
+                <div class="hide hidden cursor-pointer h-12 hover:bg-pink-200
                 border-b border-pink-600" @click="GoToTasks()">Tasks</div>
-                <div class="hide hidden cursor-pointer h-8 hover:bg-pink-200
+                <div class="hide hidden cursor-pointer h-12 hover:bg-pink-200
                 border-b border-pink-600" @click="GoToSettings()">Settings</div>
-                <div class="hide hidden cursor-pointer h-8 hover:bg-pink-200
+                <div class="hide hidden cursor-pointer h-12 hover:bg-pink-200
                 border-b border-pink-600" @click="Logout()">Logout</div>
             </nav>
         </div>

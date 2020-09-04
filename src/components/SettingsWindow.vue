@@ -86,11 +86,13 @@ export default {
   }
   @media (min-width: 1280px){
     input{
-      width: 85%;
+      width: 80%;
+      margin-right: 5%;
     }
    }
 }
 #feedBack{
+  font-family: 'Gayathri', sans-serif;
   display: none;
   margin-right: 15vw;
   margin-top: 8vh;

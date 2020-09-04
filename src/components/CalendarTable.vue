@@ -16,12 +16,12 @@
       @click="previousMM()">-</button>
     </div>
     <div class="popWindow bg-black border border-pink-600 rounded-lg text-white
-    bg-gradient-to-r from-gray-900 to-black text-center" id="popWindow">
+    bg-gradient-to-r from-gray-900 to-black text-center text-lg" id="popWindow">
       <span class="cursor-pointer fixed right-0 mr-2 text-4xl text-pink-600"
        @click="exit()">&#10799;</span>
-      <span class="text-xl text-pink-600">{{this.focusDate}}</span>
+      <span class="text-3xl text-pink-600">{{this.focusDate}}</span>
       <ul class="mt-16">
-        <li class="hover:text-pink-600 cursor-pointer"
+        <li class="hover:text-pink-600 cursor-pointer text-2xl"
         v-for="item in calendarData" :key="item" @click="deleteEvent(item)">
           {{ item }}
         </li>
@@ -70,7 +70,6 @@ export default {
   },
   methods: {
     getDays() {
-      // get acctual date
       const today = new Date();
       const dd = today.getDate();
       const mm = today.getMonth();
@@ -79,11 +78,10 @@ export default {
       this.accDay = dd;
       this.focusedMM = mm + 1;
       this.focusedYYYY = yyyy;
-      // set number of days in this month
       const x = new Date(yyyy, mm, 0).getDate();
       this.x = x;
 
-      const calendarRow = new Date(yyyy, mm).getDay(); // Sunday is 0 saturday is 6
+      const calendarRow = new Date(yyyy, mm).getDay();
       this.x = x + calendarRow;
       this.calendarRow = calendarRow;
       this.accMMCalendarRow = calendarRow;
@@ -91,20 +89,16 @@ export default {
     clearMinusDays() {
       const x = this.calendarRow;
 
-      // eslint-disable-next-line no-cond-assign
       for (let i = 1; i < 7;) {
-        // eslint-disable-next-line prefer-template
-        const acc = 'x' + (i - 1);
+        const acc = `x${i - 1}`;
         document.getElementById(acc).innerHTML = i - this.calendarRow;
         document.getElementById(acc).style.opacity = '1';
         document.getElementById(acc).style.cursor = 'pointer';
         i += 1;
       }
 
-      // eslint-disable-next-line no-cond-assign
       for (let i = 1; i < x + 1;) {
-        // eslint-disable-next-line prefer-template
-        const acc = 'x' + (i - 1);
+        const acc = `x${i - 1}`;
         document.getElementById(acc).innerHTML = '';
         document.getElementById(acc).style.opacity = '0';
         document.getElementById(acc).style.cursor = 'auto';
@@ -112,8 +106,7 @@ export default {
       }
     },
     markAccDay() {
-      // eslint-disable-next-line prefer-template
-      const dayVar = 'x' + ((this.accMMCalendarRow + this.accDay) - 1);
+      const dayVar = `x${(this.accMMCalendarRow + this.accDay) - 1}`;
       const today = new Date();
       const mm = today.getMonth();
       if (this.focusedMM - 1 === mm) {
@@ -151,8 +144,7 @@ export default {
       if (id > (this.calendarRow - 1)) {
         this.focusId = id;
         document.getElementById('popWindow').style.display = 'inline';
-        // eslint-disable-next-line prefer-template
-        let focusDate = (id - this.calendarRow + 1) + '.' + this.focusedMM + '.' + this.focusedYYYY + '      ';
+        let focusDate = `${id - this.calendarRow + 1}.${this.focusedMM}.${this.focusedYYYY}      `;
         focusDate = focusDate.substring(0, 10);
         focusDate = String(focusDate);
         this.focusDate = focusDate;
@@ -179,27 +171,14 @@ export default {
     addEvent() {
       const date = this.focusDate;
       const event = document.getElementById('newEvent__input').value;
-      // eslint-disable-next-line prefer-template
-      const newEvent = (date + '   || ' + event);
+      const newEvent = `${date}   || ${event}`;
       this.popWindow(this.focusId);
       document.getElementById('newEvent__input').value = '';
       storage.commit('addEvent', newEvent);
-      this.fetchedData = storage.getters.calendarData;
-      this.popWindow(this.focusId);
-      // update in apollo
-      let x = '';
-      for (let i = 0; i < this.fetchedData.length;) {
-        const y = this.fetchedData[i];
-        x += '**';
-        x += y;
-        i += 1;
-      }
-
-      this.$refs.apollo.mutate('events', x);
+      this.update();
     },
     deleteEvent(event) {
-      // eslint-disable-next-line prefer-template
-      let focusEvent = (this.focusDate + '   ||' + event);
+      let focusEvent = `${this.focusDate}   ||${event}`;
       focusEvent = String(focusEvent);
       let arrNum = [];
       for (let i = 0; i < this.fetchedData.length;) {
@@ -212,9 +191,11 @@ export default {
       }
       this.fetchedData.splice(arrNum, 1);
       storage.commit('updateEvents', this.fetchedData);
+      this.update();
+    },
+    update() {
       this.fetchedData = storage.getters.calendarData;
       this.popWindow(this.focusId);
-      // update in appolo
       let x = '';
       for (let i = 0; i < this.fetchedData.length;) {
         const y = this.fetchedData[i];
@@ -224,14 +205,15 @@ export default {
       }
 
       this.$refs.apollo.mutate('events', x);
-    },
-
+    }
+    ,
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .CT__wrapper{
+  font-family: 'Gayathri', sans-serif;
   margin-left: 19vw;
   margin-top: 0;
   @media (min-width: 768px) {

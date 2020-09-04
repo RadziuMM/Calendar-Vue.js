@@ -42,6 +42,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+div{
+  font-family: 'Gayathri', sans-serif;
+}
 .date{
   z-index:-1;
   width: 78vw;

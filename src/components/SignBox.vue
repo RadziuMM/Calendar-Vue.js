@@ -62,6 +62,7 @@ export default {
 </script>
 <style lang="scss" scoped>
  .SB__wrapper{
+   font-family: 'Gayathri', sans-serif;
    height: 75vh;
    width: 80vw;
    margin-left: 10vw;
