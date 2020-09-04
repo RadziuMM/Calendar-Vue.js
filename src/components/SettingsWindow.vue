@@ -64,7 +64,7 @@ export default {
   margin-left:19.5vw;
   margin-top:5vh;
   padding-right: 1vh;
-  height: 45vh;
+  height: 55vh;
   input{
     width: 52%;
     float:left;
@@ -72,9 +72,9 @@ export default {
     margin-left:5vh
   }
   @media (min-width: 768px) {
-    width: 50vw;
+    width: 53vw;
     margin-top:5vh;
-    margin-left:30vw;
+    margin-left:26vw;
     input{
       width: 60%;
     }
@@ -86,7 +86,7 @@ export default {
   }
   @media (min-width: 1280px){
     input{
-      width: 80%;
+      width: 78%;
       margin-right: 5%;
     }
    }
