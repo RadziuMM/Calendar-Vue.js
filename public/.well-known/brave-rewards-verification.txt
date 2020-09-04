@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: calendarapplication.herokuapp.com
+Token: 261bc6ee61debc25150ffa1f410510a991198f71674c5445edb79639e742d5d3
