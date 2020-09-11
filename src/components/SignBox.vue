@@ -41,21 +41,28 @@ export default {
       const pass = document.getElementById('pass').value;
       const feedBack = document.getElementById('mess');
       feedBack.innerHTML = '';
+
       this.$refs.apollo.fetch('pass', nick);
 
-      setTimeout(() => {
+      const next = () => {
         if (passwordHash.verify(pass, this.$refs.apollo.fPassword)) {
-          document.body.style.cursor = 'default';
           router.push({ path: 'FrontPage' });
         } else {
-          feedBack.innerHTML = 'Wrong nickname or password!';
-          document.body.style.cursor = 'default';
-        }
-        if (this.$refs.apollo.dataBaseError === true) {
           feedBack.innerHTML = 'Database not connected!Try again later!';
-          document.body.style.cursor = 'default';
         }
-      }, 1000);
+        if (this.$refs.apollo.fPassword !== 'error') {
+          feedBack.innerHTML = 'Wrong nickname or password!';
+        }
+        document.body.style.cursor = 'default';
+      };
+
+      const check = () => setTimeout(() => {
+        if (this.$refs.apollo.fPassword !== '') {
+          next();
+        } else { check(); }
+      }, 10);
+
+      check();
     },
   },
 };

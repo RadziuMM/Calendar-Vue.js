@@ -17,7 +17,6 @@ export default {
   data() {
     return {
       fPassword: '',
-      dataBaseError: false,
     };
   },
   methods: {
@@ -28,13 +27,17 @@ export default {
           variables: {
             name: arg1,
           },
-        // eslint-disable-next-line no-return-assign
-        }).catch(() => (
-          this.dataBaseError = true
-        )).then((result) => {
-          this.fPassword = result.data.userBYname.password;
-          storage.commit('changenick', arg1);
-        });
+        }).catch(() => {
+          this.fPassword = 'error';
+        })
+          .then((result) => {
+            try {
+              this.fPassword = result.data.userBYname.password;
+            } catch {
+              // mute error
+            }
+            storage.commit('changenick', arg1);
+          });
       }
       if (arg0 === 'all') {
         const { nick } = storage.getters;
