@@ -29,6 +29,11 @@ import storage from '../store/index';
 
 export default {
   name: 'SideMenu',
+  mounted() {
+    if (storage.getters.nick === '') {
+      routes.push({ path: '/' });
+    }
+  },
   methods: {
     GoToFrontPage() {
       routes.push({ path: 'FrontPage' });
