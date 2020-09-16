@@ -1,18 +1,19 @@
 <template>
-  <div class="TB__wrapper border border-pink-600 rounded-lg text-center text-xl">
-     <div class="text-4xl text-pink-600 border-b border-pink-600"> Task List </div>
+  <div class="TB__wrapper border border-grey-600 rounded-lg text-center text-xl">
+     <div class="text-4xl text-grey-600 border-b border-grey-600"> Task List </div>
      <ul class="">
       <li v-for="(item,xNum) in tasks" :key="item.t" v-bind:id="'t'+xNum++"
       @click='deleteTask(xNum)' class="bg-gradient-to-r from-black to-gray-900
       hover:bg-gradient-to-r hover:from-gray-900 hover:to-black border-b
-      border-pink-600 hover:text-pink-600 cursor-pointer">
+      border-grey-600 hover:text-pink-600 cursor-pointer">
         {{item }}
       </li>
-      <form class="mt-12 mb-12">
-      <input class="text-black text-center outline-none mr-4"
+      <form class="mt-12 mb-12" action="#" onsubmit="return false">
+      <input class="text-black text-center outline-none mr-4 border-grey-900 border rounded-lg"
       placeholder="add Task" id="taskBox__input"/>
-      <button class=" btn border-solid border border-pink-600
-          rounded-lg border-opacity-75 hover:bg-pink-600" @click="addTask">add</button>
+      <button class=" btn border-solid border border-grey-600 text-sm hover:text-pink-600
+          rounded-lg border-opacity-75 hover:bg-gray-900 hover:border-pink-600 p-1 pl-2 pr-2"
+           @click="addTask">ADD</button>
       </form>
       </ul>
       <apollo ref="apollo"/>
@@ -20,7 +21,6 @@
 </template>
 
 <script>
-/* eslint-disable prefer-template */
 import storage from '../store/index';
 import apollo from '../apollo.vue';
 
@@ -50,7 +50,7 @@ export default {
     change() {
       let o = '';
       for (let i = 0; i <= this.tasks.length - 1;) {
-        this.table = o + '||' + this.tasks[i];
+        this.table = `${o}||{$this.tasks[i]}`;
         i += 1;
         o = this.table;
       }

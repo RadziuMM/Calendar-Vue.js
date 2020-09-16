@@ -1,24 +1,24 @@
 <template>
-    <div class="h-screen bg-white w-12 fixed slide top-0">
+    <div class="h-screen bg-white w-12 border-grey-600 border-b border-t fixed slide top-0">
         <div class="text-red-900">
             <div>
-                <div class="bg-pink-600 w-8 h-px mt-5 ml-2"></div>
-                <div class="bg-pink-600 w-8 h-px mt-2 ml-2"></div>
-                <div class="bg-pink-600 w-8 h-px mt-2 ml-2"></div>
+                <div class="bg-black w-8 h-px mt-5 ml-2"></div>
+                <div class="bg-black w-8 h-px mt-2 ml-2"></div>
+                <div class="bg-black w-8 h-px mt-2 ml-2"></div>
             </div>
             <nav class="w-0 transition bg-gradient-to-r from-black to-gray-900
-            fixed h-full text-pink-600 top-0 ml-12 text-xl
-            nav border-pink-600 border text-center">
-                <div class="hide hidden cursor-pointer h-12 hover:bg-pink-200
-                border-t border-b border-pink-600" @click="GoToFrontPage()">Today</div>
-                <div class="hide hidden cursor-pointer h-12 hover:bg-pink-200
-                border-b border-pink-600" @click="GoToCalendar()">Calendar</div>
-                <div class="hide hidden cursor-pointer h-12 hover:bg-pink-200
-                border-b border-pink-600" @click="GoToTasks()">Tasks</div>
-                <div class="hide hidden cursor-pointer h-12 hover:bg-pink-200
-                border-b border-pink-600" @click="GoToSettings()">Settings</div>
-                <div class="hide hidden cursor-pointer h-12 hover:bg-pink-200
-                border-b border-pink-600" @click="Logout()">Logout</div>
+            fixed h-full text-white top-0 ml-12 text-xl
+            nav border-grey-600 border-r text-center">
+                <div class="hide hidden cursor-pointer h-12 hover:bg-gray-800
+                border-b border-grey-600" @click="GoToFrontPage()">Today</div>
+                <div class="hide hidden cursor-pointer h-12 hover:bg-gray-800
+                border-b border-grey-600" @click="GoToCalendar()">Calendar</div>
+                <div class="hide hidden cursor-pointer h-12 hover:bg-gray-800
+                border-b border-grey-600" @click="GoToTasks()">Tasks</div>
+                <div class="hide hidden cursor-pointer h-12 hover:bg-gray-800
+                border-b border-grey-600" @click="GoToSettings()">Settings</div>
+                <div class="hide hidden cursor-pointer h-12 hover:bg-gray-800
+                border-b border-grey-600" @click="Logout()">Logout</div>
             </nav>
         </div>
     </div>

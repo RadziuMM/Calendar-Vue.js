@@ -3,7 +3,7 @@
   RB__wrapper'>
     <div class=" mt-24 md:mt-32 lg:mt-16 text-center font-bold text-2xl tracking-wide">
       REGISTER</div>
-    <form class="text-center">
+    <form class="text-center" action="#" onsubmit="return false">
     <input placeholder="nickname" onfocus="this.placeholder = ''"
     onblur="this.placeholder = 'nickname'" required id="nick"
     class="mt-2 p-1 rounded-full text-center text-black outline-none"/>

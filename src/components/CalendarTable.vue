@@ -26,7 +26,7 @@
           {{ item }}
         </li>
       </ul>
-      <form class="mt-10">
+      <form class="mt-10" action="#" onsubmit="return false">
         <input type="text" id="newEvent__input" placeholder="add Event!" class="mt-2 p-1 text-center
         text-black outline-none"/>
         <button class="border-pink-600 border rounded-lg w-12 hover:bg-pink-600 ml-2"
@@ -198,7 +198,7 @@ export default {
 <style lang="scss" scoped>
 .CT__wrapper{
   font-family: 'Gayathri', sans-serif;
-  margin-left: 19vw;
+  margin-left: 18.5vw;
   margin-top: 0;
   @media (min-width: 768px) {
     margin-left: 15vw;
@@ -209,12 +209,12 @@ export default {
   height:60.4vh;
   width:78vw;
    @media (min-width: 768px) {
-     width:77.28vw;
+     width:77.3vw;
    }
 }
 .calendar__table--day{
   height:10vh;
-  width:11vw;
+  width:14.28%;
 }
 #x0{
   color:red;
