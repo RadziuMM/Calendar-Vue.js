@@ -50,7 +50,7 @@ export default {
     change() {
       let o = '';
       for (let i = 0; i <= this.tasks.length - 1;) {
-        this.table = `${o}||{$this.tasks[i]}`;
+        this.table = `${o}||${this.tasks[i]}`;
         i += 1;
         o = this.table;
       }
