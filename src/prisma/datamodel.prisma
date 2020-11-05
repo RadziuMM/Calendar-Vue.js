@@ -1,0 +1,8 @@
+type User{
+    id: ID! @id
+    name: String! @unique
+    exist: Boolean!
+    password: String!
+    data: String!
+    Events: String
+}

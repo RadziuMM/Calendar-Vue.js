@@ -1,0 +1,7 @@
+endpoint: 'https://heroku-ae9e4acb08.herokuapp.com'
+
+datamodel: datamodel.prisma
+
+generate:
+  - generator: javascript-client
+    output: ../src/generated/prisma-client
