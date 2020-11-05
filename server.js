@@ -52,7 +52,7 @@ const server = new ApolloServer({
   `,
   resolvers,
   engine: {
-    reportSchema: true,
+    reportSchema: false,
     variant: "current",
   },
 });
