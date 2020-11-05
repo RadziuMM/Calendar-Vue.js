@@ -27,11 +27,7 @@ export function createProvider(options = {}) {
   const apolloProvider = new VueApollo({
     defaultClient: apolloClient,
     defaultOptions: {
-      $query: {
-      },
-    },
-    errorHandler(error) {
-      console.log('%cError', 'background: red; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold;', error.message);
+      $query: {},
     },
   });
 
@@ -43,11 +39,7 @@ export async function onLogin(apolloClient, token) {
     localStorage.setItem(AUTH_TOKEN, token);
   }
   if (apolloClient.wsClient) restartWebsockets(apolloClient.wsClient);
-  try {
-    await apolloClient.resetStore();
-  } catch (e) {
-    console.log('%cError on cache reset (login)', 'color: orange;', e.message);
-  }
+  await apolloClient.resetStore();
 }
 
 export async function onLogout(apolloClient) {
@@ -55,9 +47,5 @@ export async function onLogout(apolloClient) {
     localStorage.removeItem(AUTH_TOKEN);
   }
   if (apolloClient.wsClient) restartWebsockets(apolloClient.wsClient);
-  try {
-    await apolloClient.resetStore();
-  } catch (e) {
-    console.log('%cError on cache reset (logout)', 'color: orange;', e.message);
-  }
+  await apolloClient.resetStore();
 }
